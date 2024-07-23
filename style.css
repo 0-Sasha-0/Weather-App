@@ -1,14 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap');
-
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
-  background: linear-gradient(135deg, #ff4081, #81d4fa);
-  color: #ffffff;
+  background: linear-gradient(to top, #87CEEB, #FFFFFF);
+  overflow: hidden;
 }
 
 .container {
@@ -16,14 +14,9 @@ body {
   max-width: 600px;
   width: 100%;
   padding: 20px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  background: rgba(0, 0, 0, 0.6);
-}
-
-h1 {
-  font-size: 2.5em;
-  margin-bottom: 20px;
+  background: white;
 }
 
 form {
@@ -42,7 +35,7 @@ input {
 }
 
 input:focus, button:focus {
-  outline: 2px solid #ff4081;
+  outline: 2px solid #007bff;
 }
 
 button {
@@ -51,14 +44,14 @@ button {
   border: 1px solid #ccc;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
-  background-color: #ff4081;
+  background-color: #007bff;
   color: white;
   outline: none;
   transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #f50057;
+  background-color: #0056b3;
 }
 
 #weatherResult {
@@ -103,7 +96,7 @@ button:hover {
   width: 100%;
   height: 100%;
   border: 2px solid rgba(0, 0, 0, 0.3);
-  border-top: 2px solid #ff4081;
+  border-top: 2px solid #007bff;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -111,4 +104,19 @@ button:hover {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.clouds {
+  position: absolute;
+  width: 200%;
+  height: 100px;
+  background: url('clouds.png') repeat-x;
+  bottom: 0;
+  left: -50%;
+  animation: moveClouds 60s linear infinite;
+}
+
+@keyframes moveClouds {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
 }
