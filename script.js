@@ -1,5 +1,6 @@
 const apiKey = '9598ab201cd04171bd1145314241907'; // Your Weather API key
 const apiUrl = 'https://api.weatherapi.com/v1/current.json';
+const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 const cache = new Map(); // Simple in-memory cache
 
 async function getWeather(city) {
@@ -8,11 +9,15 @@ async function getWeather(city) {
   }
 
   try {
-    const url = `${apiUrl}?key=${apiKey}&q=${city}`;
+    const url = `${proxyUrl}${apiUrl}?key=${apiKey}&q=${city}`;
     console.log('Request URL:', url); // Log request URL for debugging
 
-    const response = await fetch(url);
-    
+    const response = await fetch(url, {
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    });
+
     if (!response.ok) {
       if (response.status === 401) {
         throw new Error('Invalid API key. Please check your API key.');
@@ -22,7 +27,7 @@ async function getWeather(city) {
       }
       throw new Error('An error occurred while fetching weather data');
     }
-    
+
     const data = await response.json();
     console.log('Weather data:', data); // Log weather data for debugging
     cache.set(city, data); // Cache the response
