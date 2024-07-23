@@ -1,4 +1,4 @@
-const apiKey = '9598ab201cd04171bd1145314241907'; // Replace with your Weather API key
+const apiKey = '9598ab201cd04171bd1145314241907'; // Your Weather API key
 const apiUrl = 'https://api.weatherapi.com/v1/current.json';
 const cache = new Map(); // Simple in-memory cache
 
