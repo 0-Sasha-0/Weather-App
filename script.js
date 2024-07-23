@@ -37,7 +37,7 @@ document.getElementById('weatherForm').addEventListener('submit', async (e) => {
   const city = document.getElementById('cityInput').value.trim();
   const resultDiv = document.getElementById('weatherResult');
   resultDiv.classList.add('hidden');
-  resultDiv.innerHTML = 'Loading...';
+  resultDiv.innerHTML = '<div class="loading"></div>'; // Show loading spinner
   resultDiv.classList.remove('error');
 
   if (city === "") {
