@@ -24,6 +24,7 @@ async function getWeather(city) {
     }
     
     const data = await response.json();
+    console.log('Weather data:', data); // Log weather data for debugging
     cache.set(city, data); // Cache the response
     return data;
   } catch (error) {
@@ -49,6 +50,7 @@ document.getElementById('weatherForm').addEventListener('submit', async (e) => {
 
   try {
     const weather = await getWeather(city);
+    console.log('Weather fetched successfully:', weather); // Log success message
     resultDiv.innerHTML = `
       <h2>${weather.location.name}, ${weather.location.country}</h2>
       <p>Temperature: ${weather.current.temp_c}°C</p>
