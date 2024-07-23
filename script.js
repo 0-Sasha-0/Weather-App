@@ -1,5 +1,5 @@
-const apiKey = '9598ab201cd04171bd1145314241907'; // Replace with your actual API key
-const apiUrl = 'https://api.weatherapi.com/v1/current.json'; // Updated API URL
+const apiKey = '9598ab201cd04171bd1145314241907'; // Replace with your Weather API key
+const apiUrl = 'https://api.weatherapi.com/v1/current.json';
 const cache = new Map(); // Simple in-memory cache
 
 async function getWeather(city) {
@@ -9,10 +9,8 @@ async function getWeather(city) {
 
   try {
     const url = `${apiUrl}?key=${apiKey}&q=${city}`;
-    console.log('Request URL:', url); // Log request URL for debugging
-
     const response = await fetch(url);
-    
+
     if (!response.ok) {
       if (response.status === 401) {
         throw new Error('Invalid API key. Please check your API key.');
@@ -22,7 +20,7 @@ async function getWeather(city) {
       }
       throw new Error('An error occurred while fetching weather data');
     }
-    
+
     const data = await response.json();
     cache.set(city, data); // Cache the response
     return data;
@@ -37,7 +35,7 @@ document.getElementById('weatherForm').addEventListener('submit', async (e) => {
   const city = document.getElementById('cityInput').value.trim();
   const resultDiv = document.getElementById('weatherResult');
   resultDiv.classList.add('hidden');
-  resultDiv.innerHTML = '<div class="loading"></div>'; // Show loading spinner
+  resultDiv.innerHTML = 'Loading...';
   resultDiv.classList.remove('error');
 
   if (city === "") {
@@ -53,11 +51,9 @@ document.getElementById('weatherForm').addEventListener('submit', async (e) => {
       <h2>${weather.location.name}, ${weather.location.country}</h2>
       <p>Temperature: ${weather.current.temp_c}°C</p>
       <p>Feels Like: ${weather.current.feelslike_c}°C</p>
-      <p>Min Temp: ${weather.current.temp_c}°C</p>
-      <p>Max Temp: ${weather.current.temp_c}°C</p>
+      <p>Condition: ${weather.current.condition.text}</p>
       <p>Humidity: ${weather.current.humidity}%</p>
-      <p>Wind Speed: ${weather.current.wind_kph} km/h</p>
-      <p>Conditions: ${weather.current.condition.text}</p>
+      <p>Wind Speed: ${weather.current.wind_kph} kph</p>
     `;
     resultDiv.classList.remove('error');
   } catch (error) {
